@@ -16,7 +16,7 @@ const CreateCustomerPage = () => {
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [ssn, setSsn] = useState('')
   const [address, setAddress] = useState('')
-  const { isEmailValid, setIsEmailValid } = useState(false)
+  // const { isEmailValid, setIsEmailValid } = useState(false)
 
   const history = useHistory()
 
@@ -33,20 +33,20 @@ const CreateCustomerPage = () => {
       .catch(err => console.error(err))
   }
 
-  const validateEmail = (emailAddress) => {
-    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // const validateEmail = (emailAddress) => {
+  //   const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-    let isEmailValidVar = false
+  //   let isEmailValidVar = false
 
-    if (emailRex.test(emailAddress)) {
+  //   if (emailRex.test(emailAddress)) {
 
-      isEmailValidVar = true
-    } else {
-      isEmailValidVar = false
-    }
-    setIsEmailValid(isEmailValidVar)
-  }
+  //     isEmailValidVar = true
+  //   } else {
+  //     isEmailValidVar = false
+  //   }
+  //   setIsEmailValid(isEmailValidVar)
+  // }
 
   return (
     <div>
@@ -77,9 +77,8 @@ const CreateCustomerPage = () => {
 
           <Form.Group controlId="formCustomerCreation">
             <Form.Label>Customer Email address</Form.Label>
-            <Form.Control type="text" onChange={(e) => setEmailAddress(e.target.value)} onChange={(e) =>
-              validateEmail(e.target.value)} value={emailAddress} />
-            {isEmailValid && <FormFeedback >Must provide value for email field</FormFeedback>}
+            <Form.Control type="text" onChange={(e) => setEmailAddress(e.target.value)} value={emailAddress} />
+            {/* {isEmailValid && <FormFeedback >Must provide value for email field</FormFeedback>} */}
           </Form.Group>
 
           <br></br>

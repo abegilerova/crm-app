@@ -28,6 +28,27 @@ export const customerCreate = (first_name, last_name, phone_number, email_addres
     })
 }
 
+export const customerGet = (pk) => {
+  return fetch(`${BASE_URL}customers/${pk}`)
+    .then((response) => response.json())
+}
+
+export const customerEdit = (pk, name) => {
+  return fetch(`${BASE_URL}customers/${pk}/`, {
+    method: 'put',
+    body: JSON.stringify({
+      'name': name
+    }),
+    headers: { "Content-Type": "application/json" }
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP status " + response.status)
+      }
+      return response.json()
+    })
+}
+
 
 
 
