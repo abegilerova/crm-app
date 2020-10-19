@@ -21,6 +21,7 @@ class App extends Component {
             <Route exact path="/customers" component={CustomersListPage} />
             <Route exact path="/customers/:pk" component={CustomerPage} />
             <Route exact path="/customers/:pk/edit" component={EditCustomerPage} />
+
           </Switch>
         </Router>
       </div>

@@ -16,6 +16,12 @@ const CustomersListPage = () => {
     history.push(`/customers/${pk}/edit/`, { name: customerName });
   }
 
+  function handleDelete(pk, customerName) {
+    alert("Are you sure you want to delete?")
+
+  }
+
+
   return (
     <div>
       <h1> Customers Page </h1>
@@ -27,6 +33,7 @@ const CustomersListPage = () => {
           <li key={item.pk}>
             <Link to={`/customers/${item.pk}`}>{item.first_name}</Link>
             <Button onClick={() => handleClick(item.pk, item.first_name)}>Edit</Button>
+            <Button onClick={() => handleDelete()}>Delete</Button>
           </li>)}
       </ul>
     </div >
