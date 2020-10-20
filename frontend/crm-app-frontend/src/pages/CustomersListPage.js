@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { customerGetAll } from '../api/CrmAppApi'
+import { customerGetAll, customerDelete } from '../api/CrmAppApi'
 import Button from 'react-bootstrap/Button'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useHistory, Link } from "react-router-dom"
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+
 
 const CustomersListPage = () => {
   const [customers, setCustomers] = useState(null)
@@ -17,8 +20,21 @@ const CustomersListPage = () => {
   }
 
   function handleDelete(pk, customerName) {
-    alert("Are you sure you want to delete?")
-
+    confirmAlert({
+      title: 'Confirm to delete customer',
+      message: 'Are you sure to do this?',
+      buttons: [
+        {
+          label: 'Yes',
+          //onClick: () => alert('Click Yes')
+          onClick: () => customerDelete(pk)
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No')
+        }
+      ]
+    })
   }
 
 
@@ -33,7 +49,8 @@ const CustomersListPage = () => {
           <li key={item.pk}>
             <Link to={`/customers/${item.pk}`}>{item.first_name}</Link>
             <Button onClick={() => handleClick(item.pk, item.first_name)}>Edit</Button>
-            <Button onClick={() => handleDelete()}>Delete</Button>
+
+            <Button onClick={() => handleDelete(item.pk)}>Delete</Button>
           </li>)}
       </ul>
     </div >

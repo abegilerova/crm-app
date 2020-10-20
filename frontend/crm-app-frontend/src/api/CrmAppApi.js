@@ -55,6 +55,18 @@ export const customerEdit = (pk, first_name, last_name, phone_number, email_addr
     })
 }
 
+export const customerDelete = (pk) => {
+  return fetch(`${BASE_URL}customers/${pk}/`, {
+    method: 'delete',
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP status " + response.status)
+      }
+      return response.json()
+    })
+}
+
 
 
 
