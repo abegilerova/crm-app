@@ -88,7 +88,13 @@ const CustomersListPage = () => {
               <td>{customer.email_address}</td>
               <td>{customer.date_of_birth}</td>
               <td>{customer.ssn}</td>
-              <td>{customer.address}</td>
+              <td>
+                {customer.address}
+
+                <Button onClick={() => handleClick(customer.pk, customer.first_name)}>Edit</Button>
+
+                <Button onClick={() => handleDelete(customer.pk)}>Delete</Button>
+              </td>
             </tr>
 
           )}
