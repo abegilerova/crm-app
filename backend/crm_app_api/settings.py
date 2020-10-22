@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'crm_app_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wine_api',
+        'NAME': 'crm_app_api',
     }
 }
 
