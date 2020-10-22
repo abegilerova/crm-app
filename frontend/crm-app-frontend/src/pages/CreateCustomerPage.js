@@ -92,7 +92,7 @@ const CreateCustomerPage = () => {
 
           <Form.Group controlId="formCustomerCreation">
             <Form.Label>Customer SSN</Form.Label>
-            <Form.Control type="password" onChange={(e) => setSsn(e.target.value)} value={ssn} />
+            <Form.Control type="text" onChange={(e) => setSsn(e.target.value)} value={ssn} />
           </Form.Group>
 
           <br></br>

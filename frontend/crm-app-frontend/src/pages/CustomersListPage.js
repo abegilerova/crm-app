@@ -41,7 +41,7 @@ const CustomersListPage = () => {
 
   return (
     <div>
-      <h1> Customers Page </h1>
+      <h1> List of Customers Page </h1>
       <LinkContainer to="/customers/new">
         <Button>Create a new customer</Button>
       </LinkContainer>
@@ -81,7 +81,9 @@ const CustomersListPage = () => {
           {customers && customers.map(customer =>
 
             <tr>
-              <th scope="row">{customer.pk}</th>
+              <th scope="row">
+                <Link to={`/customers/${customer.pk}`}>{customer.pk}</Link>
+              </th>
               <td>{customer.first_name}</td>
               <td>{customer.last_name}</td>
               <td>{customer.phone_number}</td>

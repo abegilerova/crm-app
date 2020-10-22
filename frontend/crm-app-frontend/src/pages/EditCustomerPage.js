@@ -73,7 +73,7 @@ const EditCustomerPage = ({ location }) => {
 
         <Form.Group controlId="formCustomerCreation">
           <Form.Label>Customer SSN</Form.Label>
-          <Form.Control type="password" onChange={(e) => setNewSsn(e.target.value)} value={newSsn} />
+          <Form.Control type="text" onChange={(e) => setNewSsn(e.target.value)} value={newSsn} />
         </Form.Group>
 
         <br></br>
