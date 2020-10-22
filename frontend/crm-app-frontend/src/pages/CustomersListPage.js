@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useHistory, Link } from "react-router-dom"
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import { Table } from 'reactstrap';
 
 
 const CustomersListPage = () => {
@@ -44,7 +45,7 @@ const CustomersListPage = () => {
       <LinkContainer to="/customers/new">
         <Button>Create a new customer</Button>
       </LinkContainer>
-      <ul>
+      {/* <ul>
         {customers && customers.map(item =>
           <li key={item.pk}>
             <Link to={`/customers/${item.pk}`}>{item.first_name}</Link>
@@ -52,7 +53,49 @@ const CustomersListPage = () => {
 
             <Button onClick={() => handleDelete(item.pk)}>Delete</Button>
           </li>)}
-      </ul>
+      </ul> */}
+
+      <Table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+            <th> DOB</th>
+            <th> SNN</th>
+            <th> Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* <tr>
+            <th scope="row">1</th>
+            <td>
+              {customers && customers.map(item => <Link to={`/customers/${item.pk}`}>{item.first_name}</Link>)}
+            </td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr> */}
+
+          {customers && customers.map(customer =>
+
+            <tr>
+              <th scope="row">{customer.pk}</th>
+              <td>{customer.first_name}</td>
+              <td>{customer.last_name}</td>
+              <td>{customer.phone_number}</td>
+              <td>{customer.email_address}</td>
+              <td>{customer.date_of_birth}</td>
+              <td>{customer.ssn}</td>
+              <td>{customer.address}</td>
+            </tr>
+
+          )}
+        </tbody>
+      </Table>
+
+
     </div >
   )
 }
