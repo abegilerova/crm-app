@@ -9,22 +9,24 @@ import CreateCustomerPage from './pages/CreateCustomerPage'
 import CustomersListPage from './pages/CustomersListPage'
 import CustomerPage from './pages/CustomerPage'
 import EditCustomerPage from './pages/EditCustomerPage'
-
+import LoginSignUp from './components/LoginSignUp'
 
 class App extends Component {
+
   render() {
     return (
       <div>
-        <Router>
+        < Router >
           <Switch>
+            <Route exact path="/" component={LoginSignUp} />
             <Route exact path="/customers/new" component={CreateCustomerPage} />
             <Route exact path="/customers" component={CustomersListPage} />
             <Route exact path="/customers/:pk" component={CustomerPage} />
             <Route exact path="/customers/:pk/edit" component={EditCustomerPage} />
 
           </Switch>
-        </Router>
-      </div>
+        </Router >
+      </div >
     )
   }
 }
