@@ -25,6 +25,10 @@ const CustomerPage = () => {
     history.push(`/customers/${pk}/edit/`, { name: customerName });
   }
 
+  function handleDeleteButtonYesClick() {
+    history.push(`/customers`)
+  }
+
   function handleDelete(pk, customerName) {
     confirmAlert({
       title: 'Confirm to delete customer',
@@ -33,8 +37,8 @@ const CustomerPage = () => {
         {
           label: 'Yes',
           onClick: () => {
-            customerDelete(pk)
-            history.push(`/customers/`)
+            customerDelete(pk, tokenCrmApp)
+            handleDeleteButtonYesClick()
           }
 
         },
