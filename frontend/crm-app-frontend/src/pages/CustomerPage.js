@@ -12,8 +12,10 @@ const CustomerPage = () => {
   const { pk } = useParams()
   const history = useHistory()
 
+  let tokenCrmApp = localStorage.getItem('token')
+
   useEffect(() => {
-    customerGet(pk).then(d => setCustomer(d))
+    customerGet(pk, tokenCrmApp).then(d => setCustomer(d))
     console.log('pk', pk)
     console.log("customer ", customer)
   }, [pk])

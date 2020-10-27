@@ -5,9 +5,12 @@ from .views import current_user, UserList
 
 router = DefaultRouter()
 router.register(r'customers', CustomerViewSet)
-urlpatterns = router.urls
+# urlpatterns = router.urls
 
 urlpatterns = [
+    
     path('current_user/', current_user),
-    path('users/', UserList.as_view())
+    path('users/', UserList.as_view()),
+    path('', include(router.urls))
+ 
 ]

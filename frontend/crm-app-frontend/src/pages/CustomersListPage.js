@@ -12,15 +12,17 @@ const CustomersListPage = () => {
   const [customers, setCustomers] = useState(null)
   const history = useHistory()
 
+  let tokenCrmApp = localStorage.getItem('token')
+
   useEffect(() => {
-    customerGetAll().then(d => setCustomers(d))
+    customerGetAll(tokenCrmApp).then(d => setCustomers(d))
   }, [])
 
   function handleClick(pk, customerName) {
     history.push(`/customers/${pk}/edit/`, { name: customerName });
   }
 
-  function handleDelete(pk, customerName) {
+  function handleDelete(pk, tokenCrmApp) {
     confirmAlert({
       title: 'Confirm to delete customer',
       message: 'Are you sure to do this?',
@@ -28,7 +30,7 @@ const CustomersListPage = () => {
         {
           label: 'Yes',
           //onClick: () => alert('Click Yes')
-          onClick: () => customerDelete(pk)
+          onClick: () => customerDelete(pk, tokenCrmApp)
         },
         {
           label: 'No',

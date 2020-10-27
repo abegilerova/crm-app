@@ -21,11 +21,13 @@ const CreateCustomerPage = () => {
   const history = useHistory()
 
 
+  let tokenCrmApp = localStorage.getItem('token')
+
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(firstName)
 
-    customerCreate(firstName, lastName, phoneNumber, emailAddress, dateOfBirth, ssn, address)
+    customerCreate(firstName, lastName, phoneNumber, emailAddress, dateOfBirth, ssn, address, tokenCrmApp)
       .then(data => {
         console.log(data)
         history.push(`/customers/${data.pk}`)

@@ -20,10 +20,11 @@ const EditCustomerPage = ({ location }) => {
 
   console.log("pk edit ", pk)
 
+  let tokenCrmApp = localStorage.getItem('token')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    customerEdit(pk, newFirstName, newLastName, newPhoneNumber, newEmailAddress, newDateOfBirth, newSsn, newAddress)
+    customerEdit(pk, newFirstName, newLastName, newPhoneNumber, newEmailAddress, newDateOfBirth, newSsn, newAddress, tokenCrmApp)
       .then(data => {
         history.push(`/customers/${data.pk}`)
       })
