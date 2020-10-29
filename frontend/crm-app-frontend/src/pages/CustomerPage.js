@@ -29,7 +29,7 @@ const CustomerPage = () => {
     history.push(`/customers`)
   }
 
-  function handleDelete(pk, customerName) {
+  function handleDelete(pk) {
     confirmAlert({
       title: 'Confirm to delete customer',
       message: 'Are you sure to do this?',
@@ -53,6 +53,7 @@ const CustomerPage = () => {
   return (
     <div>
       <h1> {customer && customer.first_name}</h1>
+      <h1> {customer && customer.last_name}</h1>
       <Button onClick={() => handleClick(customer.pk, customer.first_name)}>Edit</Button>
 
       <Button onClick={() => handleDelete(customer.pk)}>Delete</Button>

@@ -16,16 +16,53 @@ const CreateCustomerPage = () => {
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [ssn, setSsn] = useState('')
   const [address, setAddress] = useState('')
-  // const { isEmailValid, setIsEmailValid } = useState(false)
+  const [isFistNameInvalid, setIsFirstNameInvalid] = React.useState(false);
+  const [isLastNameInvalid, setIsLastNameInvalid] = React.useState(false);
+  const [isEmailInvalid, setIsEmailInvalid] = React.useState(false);
+
 
   const history = useHistory()
 
 
   let tokenCrmApp = localStorage.getItem('token')
 
+  const textChanged = (event) => {
+    const currentInput = event.target.value;
+    const targetId = event.target.id;
+    const isInputInvalid = currentInput === '';
+
+    const isEmailInputInvalid = validateEmail(currentInput)
+
+    if (targetId === 'FN')
+      setIsFirstNameInvalid(isInputInvalid);
+    else if (targetId === 'LN')
+      setIsLastNameInvalid(isInputInvalid);
+    else if (targetId === 'EMAIL')
+      setIsEmailInvalid(isEmailInputInvalid);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(firstName)
+
+    const customerObject = {
+      firstName: event.target.elements[0].value,
+      lastName: event.target.elements[1].value,
+      email: event.target.elements[3].value
+    }
+
+    let invalidFN = customerObject.firstName === "";
+    let invalidLN = customerObject.lastName === "";
+    let invalidEmail = validateEmail(customerObject.email)
+
+    setIsFirstNameInvalid(invalidFN);
+    setIsLastNameInvalid(invalidLN);
+    setIsEmailInvalid(invalidEmail);
+
+    if (invalidFN || invalidLN || invalidEmail)
+      return;
+
+
 
     customerCreate(firstName, lastName, phoneNumber, emailAddress, dateOfBirth, ssn, address, tokenCrmApp)
       .then(data => {
@@ -35,20 +72,11 @@ const CreateCustomerPage = () => {
       .catch(err => console.error(err))
   }
 
-  // const validateEmail = (emailAddress) => {
-  //   const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-
-  //   let isEmailValidVar = false
-
-  //   if (emailRex.test(emailAddress)) {
-
-  //     isEmailValidVar = true
-  //   } else {
-  //     isEmailValidVar = false
-  //   }
-  //   setIsEmailValid(isEmailValidVar)
-  // }
+  const validateEmail = (emailAddress) => {
+    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log("validate email ", emailRex.test(emailAddress))
+    return !emailRex.test(emailAddress)
+  }
 
   return (
     <div>
@@ -58,14 +86,16 @@ const CreateCustomerPage = () => {
         <Row form>
           <Form.Group controlId="formCustomerFirst">
             <Form.Label>Customer First Name</Form.Label>
-            <Form.Control type="text" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+            <Form.Control type="text" id="FN" invalid={isFistNameInvalid} onChange={(e) => textChanged} onChange={(e) => setFirstName(e.target.value)} value={firstName} />
+            {isFistNameInvalid && <FormFeedback style={{ color: "red" }}>First Name cannot be left blank</FormFeedback>}
           </Form.Group>
 
           <br></br>
 
           <Form.Group controlId="formCustomerCreation">
             <Form.Label>Customer Last Name</Form.Label>
-            <Form.Control type="text" onChange={(e) => setLastName(e.target.value)} value={lastName} />
+            <Form.Control type="text" id="LN" invalid={isLastNameInvalid} onChange={(e) => setLastName(e.target.value)} value={lastName} />
+            {isLastNameInvalid && <FormFeedback style={{ color: "red" }} >First Name cannot be left blank</FormFeedback>}
           </Form.Group>
 
           <br></br>
@@ -79,8 +109,8 @@ const CreateCustomerPage = () => {
 
           <Form.Group controlId="formCustomerCreation">
             <Form.Label>Customer Email address</Form.Label>
-            <Form.Control type="text" onChange={(e) => setEmailAddress(e.target.value)} value={emailAddress} />
-            {/* {isEmailValid && <FormFeedback >Must provide value for email field</FormFeedback>} */}
+            <Form.Control type="text" id="EMAIL" invalid={isEmailInvalid} onChange={(e) => textChanged} onChange={(e) => setEmailAddress(e.target.value)} value={emailAddress} />
+            {isEmailInvalid && <FormFeedback style={{ color: "red" }} >Email format is  incorrect</FormFeedback>}
           </Form.Group>
 
           <br></br>

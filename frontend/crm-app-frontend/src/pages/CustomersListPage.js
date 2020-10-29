@@ -47,6 +47,9 @@ const CustomersListPage = () => {
       <LinkContainer to="/customers/new">
         <Button>Create a new customer</Button>
       </LinkContainer>
+      <br></br>
+      <br></br>
+      <br></br>
       {/* <ul>
         {customers && customers.map(item =>
           <li key={item.pk}>
